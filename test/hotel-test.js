@@ -4,6 +4,7 @@ const expect = chai.expect;
 import Hotel from '../src/Hotel';
 import bookings from '../data/bookings-data';
 import rooms from '../data/rooms-data';
+import users from '../data/users-data';
 
 describe('Hotel', () => {
   let hotel;
@@ -45,8 +46,8 @@ describe('Hotel', () => {
     expect(hotel.calculateRevenue("2019/11/06")).to.equal(935.11);
   });
 
-  it('should calculate the percentage of rooms available for a given date', () => {
-    expect(hotel.calculatePercentAvailable("2019/11/06")).to.equal(88)
+  it('should calculate the percentage of rooms occupied for a given date', () => {
+    expect(hotel.calculatePercentOccupancy("2019/11/06")).to.equal(12)
   })
 
 });
