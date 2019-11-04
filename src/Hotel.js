@@ -17,7 +17,7 @@ class Hotel {
         openRooms.push(room)
       }
     })
-    return openRooms;
+    return openRooms.length;
   }
 
   calculateRevenue(date) {
@@ -33,7 +33,7 @@ class Hotel {
   }
 
   calculatePercentOccupancy(date) {
-    return 100 - (this.returnAvailableRooms(date).length/this.rooms.length) * 100;
+    return 100 - (this.returnAvailableRooms(date)/this.rooms.length) * 100;
   }
 
   bookRoom() {
