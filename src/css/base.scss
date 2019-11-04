@@ -73,6 +73,12 @@ input {
   font-size: 1.5em;
   border: none;
   border-radius: 3px;
+    &:hover {
+      background-color: rgb(91, 91, 254);
+    }
+    &:active {
+      transform: scale(.97);
+    }
 }
 
 .error {

@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 
 .manager-header {
@@ -23,20 +24,18 @@
 .manager-main {
   padding: 30px;
   padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.occupancy {
-  text-align: center;
-  padding: 10px 30px 10px 30px;
-  background: white;
-  width: 30%;
-  height: 30vh;
-  box-shadow: $box-shadow;
-  border-radius: 3px;
-  font-size: 2em;
+.manager-tile {
+  @include managerDashboardTile;
 }
 
-.occupancy-title {
-  margin: 0px;
-  border-bottom: .5px solid blue;
+.manager-tile-title {
+ @include managerTileTitle;
+}
+
+.manager-tile-number {
+  @include managerTileNumber;
 }
