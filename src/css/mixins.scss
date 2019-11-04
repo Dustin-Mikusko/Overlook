@@ -1,0 +1,21 @@
+@mixin managerDashboardTile {
+  text-align: center;
+  padding: 10px 30px 10px 30px;
+  background: white;
+  width: 30%;
+  height: 30vh;
+  box-shadow: $box-shadow;
+  border-radius: 3px;
+  font-size: 2em;
+  margin: 10px;
+}
+
+@mixin managerTileTitle {
+  margin: 0px;
+  border-bottom: 2.5px solid blue;
+}
+
+@mixin managerTileNumber {
+  font-size: 3.5em;
+  margin-top: 15px;
+}
