@@ -4,6 +4,7 @@ import './css/base.scss';
 import './css/manager-deck.scss';
 import './css/user-deck.scss';
 import './css/variables.scss';
+import './css/mixins.scss';
 
 import Hotel from './Hotel';
 import Manager from './Manager';
@@ -59,13 +60,13 @@ function checkInputs() {
   }
 }
 
-function pageLoad() {
-  JSON.parse(localStorage.getItem('hotel'));
-    JSON.parse(localStorage.getItem('manager'));
-    console.log('hello')
-    $('.occupancy-title').after(`${hotel.calculatePercentAvailable()}%`);
-    console.log('hello');
-}
+// function pageLoad() {
+//   JSON.parse(localStorage.getItem('hotel'));
+//     JSON.parse(localStorage.getItem('manager'));
+//     console.log('hello')
+//     $('.occupancy-title').after(`${hotel.calculatePercentAvailable()}%`);
+//     console.log('hello');
+// }
 
 function createError() {
   $('.user-login-btn').after('<p class="error">Incorrect User ID and/or Password</p>');
@@ -78,7 +79,9 @@ function createError() {
 function managerHandler() {
   $('.login-page').addClass('hidden');
   $('.manager-body').removeClass('hidden');
-  $('.occupancy-title').after(`${hotel.calculatePercentAvailable()}%`);
+  $('#occupancy-title').after(`<p class="manager-tile-number">${hotel.calculatePercentOccupancy(date)}%</p>`);
+  $('#revenue-title').after(`<p class="manager-tile-number"> $${hotel.calculateRevenue(date)}</p>`);
+  $('#rooms-available').after(`<p class="manager-tile-number"> ${hotel.returnAvailableRooms(date)}`);
 }
 
 function customerHandler() {
