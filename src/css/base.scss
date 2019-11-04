@@ -1,9 +1,6 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-font: 'Roboto', sans-serif;
-$logo-font: 'ZCOOL XiaoWei', serif;
-$primary-font-color: blue;
+@import 'variables';
 
-body {
+.login-page {
   font-family: $primary-font;
   background: linear-gradient(to bottom right,rgba(255, 255, 255, 0.9), rgba(255, 254, 254, 0.6)), url("../images/room.jpg");
   background-repeat: no-repeat;
@@ -32,7 +29,7 @@ h2 {
 
 #login-form {
   color: $primary-font-color;
-  box-shadow: 0px 0px 10px -2px #000000;
+  box-shadow: $box-shadow;
   border: .5px solid grey;
   border-radius: 5px;
   background: white;
@@ -80,4 +77,8 @@ input {
 
 .error {
   color: red;
+}
+
+.hidden {
+  display: none;
 }
