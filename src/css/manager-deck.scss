@@ -1,0 +1,22 @@
+.manager-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid blue;
+  background: white;
+}
+
+.date {
+  margin-right: 20px;
+  margin-top: auto;
+}
+
+.manager-body {
+  background: rgba(0, 0, 255, 0.61);
+}
+
+.occupancy {
+  background: white;
+  width: 10%;
+  height: 50px;
+  box-shadow: 0px 0px 10px -2px #000000;
+}

@@ -8,7 +8,7 @@ body {
   background: linear-gradient(to bottom right,rgba(255, 255, 255, 0.9), rgba(255, 254, 254, 0.6)), url("../images/room.jpg");
   background-repeat: no-repeat;
   background-size: 200vh;
-  height: 98vh;
+  height: 100vh;
   position: relative;
   margin: 0;
   
@@ -38,16 +38,9 @@ h2 {
   background: white;
   margin: auto;
   width: 40%;
-  height: 45vh;
+  height: 35vh;
   padding: 25px;
   margin-top: 100px;
-}
-
-.login-selector {
-  padding: 10px;
-  font-size: 1.2em;
-  display: flex;
-  justify-content: space-evenly;
 }
 
 #manager {
@@ -61,14 +54,19 @@ h2 {
 }
 
 input {
-  height: 20px;
+  height: 40px;
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   font-size: 1.5em;
+  padding-left: 5px;
 }
 
-button {
+.btn-container {
+  text-align: center;
+}
+
+.user-login-btn {
   background-color: blue;
   margin: auto;
   height: 40px;
@@ -78,4 +76,8 @@ button {
   font-size: 1.5em;
   border: none;
   border-radius: 3px;
+}
+
+.error {
+  color: red;
 }
