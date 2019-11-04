@@ -1,11 +1,16 @@
 import Hotel from "./Hotel";
 
 class Manager extends Hotel {
-  constructor() {
-  
+  constructor(bookings, rooms, users) {
+    super(bookings, rooms);
+    this.users = users;
   }
 
-  findUser() {
+  findUser(user) {
+    
+  }
+
+  deleteBooking() {
 
   }
 }

@@ -34,7 +34,16 @@ module.exports = {
   // Below is needed for webpack-dev-server
   plugins: [
     new HtmlWebpackPlugin({
+      filename: 'index.html',
       template: './src/index.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'user-deck.html',
+      template: './src/user-deck.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'manager-deck.html',
+      template: './src/manager-deck.html'
     })
   ],
   devServer: {
