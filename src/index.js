@@ -1,34 +1,91 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import './css/manager-deck.scss';
-import './css/user-deck.scss'
+import './css/user-deck.scss';
+import './css/variables.scss';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+import Hotel from './Hotel';
+import Manager from './Manager';
+import User from './User';
+
+var hotel;
+var manager;
+
+function getData(type) {
+	const root = 'https://fe-apps.herokuapp.com/api/v1/overlook/1904/';
+	const url = `${root}${type}`;
+	const promise = fetch(url)
+	                .then(data => data.json());
+	return promise;
+}
+
+let bookings = getData('bookings/bookings');
+let rooms = getData('rooms/rooms');
+let users = getData('users/users');
+
+Promise.all([bookings, rooms, users]).then(promises => {
+  bookings = promises[0];
+  rooms = promises[1];
+  users = promises[2];
+}).then(() => {
+  hotel = new Hotel(bookings.bookings, rooms.rooms);
+  manager = new Manager(bookings.bookings, rooms.rooms, users.users);
+  JSON.stringify(localStorage.setItem('hotel', JSON.stringify(hotel)));
+  JSON.stringify(localStorage.setItem('manager', JSON.stringify(manager))); 
+  console.log(hotel);
+});
 
 
-$('.user-login-btn').on('click', function() {
+$('.user-login-btn').on('click', loginHandler);
+
+function loginHandler() {
+  
+  checkInputs();
+
+}
+
+function checkInputs() {
   let $user = $('#user-id').val();
   let $password = $('#user-password').val()
   if ($user === 'manager' && $password === 'overlook2019') {
-    window.location = '/manager-deck.html';
+    managerHandler();
+    console.log('hello')
   } 
   if ($user.includes('customer') && $password === 'overlook2019') {
-  window.location = "/user-deck.html";
+  customerHandler();
   } else {
-    $('.user-login-btn').after('<p class="error">Incorrect User ID and/or Password</p>');
+    createError();
+  }
+}
+
+function pageLoad() {
+  JSON.parse(localStorage.getItem('hotel'));
+    JSON.parse(localStorage.getItem('manager'));
+    console.log('hello')
+    $('.occupancy-title').after(`${hotel.calculatePercentAvailable()}%`);
+    console.log('hello');
+}
+
+function createError() {
+  $('.user-login-btn').after('<p class="error">Incorrect User ID and/or Password</p>');
     $('input').css('border', '1px solid red');
     setTimeout(() => {
       $('.error').css('display', 'none');
     }, 1500)
-  }
-});
+}
+
+function managerHandler() {
+  $('.login-page').addClass('hidden');
+  $('.manager-body').removeClass('hidden');
+  $('.occupancy-title').after(`${hotel.calculatePercentAvailable()}%`);
+}
+
+function customerHandler() {
+  return window.location = '/user-deck.html';
+}
+
+
 
 function formatDate(date) {
   var monthNames = [
@@ -63,3 +120,5 @@ function dropYear(dates) {
   })
   return reformattedDates
 }
+
+
