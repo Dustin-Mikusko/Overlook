@@ -1,8 +1,7 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
 $primary-font: 'Roboto', sans-serif;
 $logo-font: 'ZCOOL XiaoWei', serif;
-$primary-font-color: rbga(19, 209, 235, 1);
+$primary-font-color: blue;
 
 body {
   font-family: $primary-font;
@@ -12,6 +11,7 @@ body {
   height: 98vh;
   position: relative;
   margin: 0;
+  
 }
 
 h1 {
@@ -25,22 +25,28 @@ h2 {
   text-align: center;
 }
 
+.login-container {
+  
+  text-align: center;
+}
+
 #login-form {
-  box-shadow: 0px 0px 10px -2px;
+  color: $primary-font-color;
+  box-shadow: 0px 0px 10px -2px #000000;
   border: .5px solid grey;
   border-radius: 5px;
   background: white;
   margin: auto;
   width: 40%;
   height: 45vh;
-  padding: 10px;
+  padding: 25px;
+  margin-top: 100px;
 }
 
 .login-selector {
   padding: 10px;
   font-size: 1.2em;
   display: flex;
-  justify-content: center;
   justify-content: space-evenly;
 }
 
@@ -49,5 +55,27 @@ h2 {
 }
 
 .login-inputs {
-  text-align: ce;
+  margin: auto;
+  text-align: left;
+  width: 50%;
+}
+
+input {
+  height: 20px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+button {
+  background-color: blue;
+  margin: auto;
+  height: 40px;
+  width: 30%;
+  color: white;
+  font-family: $primary-font;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 3px;
 }
