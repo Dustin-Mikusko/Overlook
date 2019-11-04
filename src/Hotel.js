@@ -32,8 +32,8 @@ class Hotel {
     }, 0)
   }
 
-  calculatePercentAvailable(date) {
-    return (this.returnAvailableRooms(date).length/this.rooms.length) * 100;
+  calculatePercentOccupancy(date) {
+    return 100 - (this.returnAvailableRooms(date).length/this.rooms.length) * 100;
   }
 
   bookRoom() {
