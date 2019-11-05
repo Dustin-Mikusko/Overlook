@@ -1,0 +1,59 @@
+@import 'variables';
+@import 'mixins';
+
+.customer-header {
+ @include header;
+}
+
+.date {
+  margin-right: 20px;
+  margin-top: auto;
+}
+
+.customer-body {
+  background: linear-gradient(to bottom right,rgba(0, 0, 255, 0.61), rgba(0, 0,255, 0.1));
+  height: 100vh;
+  width: 100%;
+}
+
+.customer-main {
+  padding: 30px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-tile {
+  @include managerDashboardTile;
+}
+
+.dashboard-tile-title {
+ @include managerTileTitle;
+}
+
+.dashboard-tile-number {
+  @include managerTileNumber;
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+
+@media screen and (max-width: 900px) {
+  .customer-main {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .customer-main {
+    display: block;
+  }
+
+  .customer-tile {
+    width: 85%;
+  }
+}

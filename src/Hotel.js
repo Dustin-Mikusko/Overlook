@@ -17,7 +17,7 @@ class Hotel {
         openRooms.push(room)
       }
     })
-    return openRooms.length;
+    return openRooms;
   }
 
   calculateRevenue(date) {
@@ -33,11 +33,27 @@ class Hotel {
   }
 
   calculatePercentOccupancy(date) {
-    return 100 - (this.returnAvailableRooms(date)/this.rooms.length) * 100;
+    return 100 - (this.returnAvailableRooms(date).length/this.rooms.length) * 100;
   }
 
-  bookRoom() {
+  returnAllBookings(userID) {
+    return this.bookings.filter(booking => booking.userID === userID);
+  }
 
+  returnPastBookings(userID, date) {
+    return this.bookings.filter(booking => booking.userID === userID && booking.date < date);
+  }
+
+  returnUpcomingBookings(userID, date) {
+    return this.bookings.filter(booking => booking.userID === userID && booking.date >= date)
+  }
+
+  calculateTotalSpent(userID) {
+    return this.returnAllBookings(userID).reduce((acc, booking) => {
+      let cost = Math.floor(this.rooms.find(room => room.number === booking.roomNumber).costPerNight);
+      acc += cost;
+      return acc;
+    }, 0)
   }
 
 }
