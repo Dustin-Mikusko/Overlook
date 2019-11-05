@@ -20,6 +20,7 @@ h1 {
 
 h2 {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .login-container {
@@ -75,6 +76,7 @@ input {
   border-radius: 3px;
     &:hover {
       background-color: rgb(91, 91, 254);
+      cursor: pointer;
     }
     &:active {
       transform: scale(.97);
