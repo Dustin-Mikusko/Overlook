@@ -34,6 +34,7 @@ Promise.all([bookings, rooms, users]).then(promises => {
 }).then(() => {
   hotel = new Hotel(bookings.bookings, rooms.rooms);
   console.log(hotel);
+  console.log(users.users)
 });
 
 
@@ -46,13 +47,13 @@ function loginHandler() {
 function checkInputs() {
   let $user = $('#user-id').val();
   let $password = $('#user-password').val();
-  let $userID = $user.split('r')[1];
   if ($user === 'manager' && $password === 'overlook2019') {
     managerHandler();
     console.log('hello')
   } 
   if ($user.includes('customer') && $password === 'overlook2019') {
-    customerHandler();
+    let $userID = Number($user.split('r')[1]);
+    customerHandler($userID);
   } else {
     createError();
   }
@@ -68,18 +69,20 @@ function createError() {
 }
 
 function managerHandler() {
+  manager = new Manager()
   $('.login-page').addClass('hidden');
   $('.manager-body').removeClass('hidden');
   $('#occupancy-title').after(`<p class="manager-tile-number">${hotel.calculatePercentOccupancy(date)}%</p>`);
   $('#revenue-title').after(`<p class="manager-tile-number"> $${hotel.calculateRevenue(date).toFixed(2)}</p>`);
   $('#rooms-available').after(`<p class="manager-tile-number"> ${hotel.returnAvailableRooms(date).length}`);
-  console.log(date);
 }
 
-function customerHandler() {
+function customerHandler(userID) {
+  let userName = users.users.find(user => user.id === userID);
+  console.log(userName);
   $('.login-page').addClass('hidden');
   $('.customer-body').removeClass('hidden');
-  console.log('hello');
+  $('.user-welcome').html(`Welcome,<br> ${userName.name.split(' ')[0]}!`)
 }
 
 
