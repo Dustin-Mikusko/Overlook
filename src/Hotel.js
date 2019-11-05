@@ -33,7 +33,7 @@ class Hotel {
   }
 
   calculatePercentOccupancy(date) {
-    return 100 - (this.returnAvailableRooms(date).length/this.rooms.length) * 100;
+    return (100 - (this.returnAvailableRooms(date).length/this.rooms.length) * 100).toFixed(0);
   }
 
   returnAllBookings(userID) {
