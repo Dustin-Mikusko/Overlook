@@ -72,19 +72,30 @@ function managerHandler() {
   manager = new Manager()
   $('.login-page').addClass('hidden');
   $('.manager-body').removeClass('hidden');
-  $('#occupancy-title').after(`<p class="manager-tile-number">${hotel.calculatePercentOccupancy(date)}%</p>`);
-  $('#revenue-title').after(`<p class="manager-tile-number"> $${hotel.calculateRevenue(date).toFixed(2)}</p>`);
-  $('#rooms-available').after(`<p class="manager-tile-number"> ${hotel.returnAvailableRooms(date).length}`);
+  $('#occupancy-title').after(`<p class="dashboard-tile-number">${hotel.calculatePercentOccupancy(date)}%</p>`);
+  $('#revenue-title').after(`<p class="dashboard-tile-number"> $${hotel.calculateRevenue(date).toFixed(2)}</p>`);
+  $('#rooms-available').after(`<p class="dashboard-tile-number"> ${hotel.returnAvailableRooms(date).length}`);
 }
 
 function customerHandler(userID) {
   let userName = users.users.find(user => user.id === userID);
-  console.log(userName);
+  let pastBookings = hotel.returnPastBookings(userID, date);
+  let upcomingBookings = hotel.returnUpcomingBookings(userID, date);
   $('.login-page').addClass('hidden');
   $('.customer-body').removeClass('hidden');
-  $('.user-welcome').html(`Welcome,<br> ${userName.name.split(' ')[0]}!`)
+  $('.user-welcome').html(`Welcome,<br> ${userName.name.split(' ')[0]}!`);
+  $('#upcoming-title').after(`${makePastList(userID)}`);
+  $('#past-title').after(`<p class="dashboard-tile-number"> ${hotel.returnPastBookings(userID, date)}</p>`);
+  $('#total-available').after(`<p class="dashboard-tile-number"> $${hotel.calculateTotalSpent(userID)}`);
 }
 
+
+function makePastList(userID) {
+  return hotel.returnPastBookings(userID, date).reduce((acc,booking) => {
+    acc += `<li>Room#${booking.roomNumber} on ${booking.date}</li>`
+    return acc;
+  }, '')
+}
 
 
 function formatDate(date) {

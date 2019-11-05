@@ -3,11 +3,7 @@
 
 
 .manager-header {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 2px solid blue;
-  background: white;
-  padding-bottom: 10px;
+ @include header;
 }
 
 .date {
@@ -16,7 +12,7 @@
 }
 
 .manager-body {
-  background: rgba(0, 0, 255, 0.61);
+  background: linear-gradient(to bottom right,rgba(0, 0, 255, 0.61), rgba(0, 0, 255, 0.1));
   height: 100vh;
   width: 100%;
 }
@@ -28,15 +24,15 @@
   justify-content: space-between;
 }
 
-.manager-tile {
+.dashboard-tile {
   @include managerDashboardTile;
 }
 
-.manager-tile-title {
+.dashboard-tile-title {
  @include managerTileTitle;
 }
 
-.manager-tile-number {
+.dashboard-tile-number {
   @include managerTileNumber;
 }
 
