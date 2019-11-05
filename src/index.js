@@ -12,6 +12,7 @@ import User from './User';
 
 var hotel;
 var manager;
+var user;
 
 function getData(type) {
 	const root = 'https://fe-apps.herokuapp.com/api/v1/overlook/1904/';
@@ -25,15 +26,13 @@ let bookings = getData('bookings/bookings');
 let rooms = getData('rooms/rooms');
 let users = getData('users/users');
 
+
 Promise.all([bookings, rooms, users]).then(promises => {
   bookings = promises[0];
   rooms = promises[1];
   users = promises[2];
 }).then(() => {
   hotel = new Hotel(bookings.bookings, rooms.rooms);
-  manager = new Manager(bookings.bookings, rooms.rooms, users.users);
-  JSON.stringify(localStorage.setItem('hotel', JSON.stringify(hotel)));
-  JSON.stringify(localStorage.setItem('manager', JSON.stringify(manager))); 
   console.log(hotel);
 });
 
@@ -41,32 +40,24 @@ Promise.all([bookings, rooms, users]).then(promises => {
 $('.user-login-btn').on('click', loginHandler);
 
 function loginHandler() {
-  
-  checkInputs();
-
+ checkInputs()
 }
 
 function checkInputs() {
   let $user = $('#user-id').val();
-  let $password = $('#user-password').val()
+  let $password = $('#user-password').val();
+  let $userID = $user.split('r')[1];
   if ($user === 'manager' && $password === 'overlook2019') {
     managerHandler();
     console.log('hello')
   } 
   if ($user.includes('customer') && $password === 'overlook2019') {
-  customerHandler();
+    customerHandler();
   } else {
     createError();
   }
 }
 
-// function pageLoad() {
-//   JSON.parse(localStorage.getItem('hotel'));
-//     JSON.parse(localStorage.getItem('manager'));
-//     console.log('hello')
-//     $('.occupancy-title').after(`${hotel.calculatePercentAvailable()}%`);
-//     console.log('hello');
-// }
 
 function createError() {
   $('.user-login-btn').after('<p class="error">Incorrect User ID and/or Password</p>');
@@ -80,12 +71,15 @@ function managerHandler() {
   $('.login-page').addClass('hidden');
   $('.manager-body').removeClass('hidden');
   $('#occupancy-title').after(`<p class="manager-tile-number">${hotel.calculatePercentOccupancy(date)}%</p>`);
-  $('#revenue-title').after(`<p class="manager-tile-number"> $${hotel.calculateRevenue(date)}</p>`);
-  $('#rooms-available').after(`<p class="manager-tile-number"> ${hotel.returnAvailableRooms(date)}`);
+  $('#revenue-title').after(`<p class="manager-tile-number"> $${hotel.calculateRevenue(date).toFixed(2)}</p>`);
+  $('#rooms-available').after(`<p class="manager-tile-number"> ${hotel.returnAvailableRooms(date).length}`);
+  console.log(date);
 }
 
 function customerHandler() {
-  return window.location = '/user-deck.html';
+  $('.login-page').addClass('hidden');
+  $('.customer-body').removeClass('hidden');
+  console.log('hello');
 }
 
 
@@ -97,7 +91,7 @@ function formatDate(date) {
     "8", "9", "10",
     "11", "12"
   ];
-  var day = date.getDate();
+  var day = ("0" + date.getDate()).slice(-2);
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
   return year + '/' + monthNames[monthIndex] + '/' + day;
