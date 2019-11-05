@@ -23,20 +23,29 @@
   justify-content: space-between;
 }
 
-.dashboard-tile {
+.customer-tile {
   @include managerDashboardTile;
+  height: 60vh;
+  overflow: scroll;
 }
 
-.dashboard-tile-title {
+.customer-tile-title {
  @include managerTileTitle;
 }
 
-.dashboard-tile-number {
+.customer-tile-number {
   @include managerTileNumber;
 }
 
-ul {
-  list-style-type: none;
+.book-list {
+  padding: 0;
+}
+
+.list-items {
+  background: rgba(0, 0,255, 0.1);
+  margin: 5px 0px 5px 0px;
+  text-align: center;
+  padding: 0;
 }
 
 

@@ -79,20 +79,25 @@ function managerHandler() {
 
 function customerHandler(userID) {
   let userName = users.users.find(user => user.id === userID);
-  let pastBookings = hotel.returnPastBookings(userID, date);
-  let upcomingBookings = hotel.returnUpcomingBookings(userID, date);
   $('.login-page').addClass('hidden');
   $('.customer-body').removeClass('hidden');
   $('.user-welcome').html(`Welcome,<br> ${userName.name.split(' ')[0]}!`);
-  $('#upcoming-title').after(`${makePastList(userID)}`);
-  $('#past-title').after(`<p class="dashboard-tile-number"> ${hotel.returnPastBookings(userID, date)}</p>`);
+  $('#upcoming-title').after(`<ul class="book-list">${makeUpcomingList(userID)}</ul>`);
+  $('#past-title').after(`<ul class="book-list">${makePastList(userID)}</ul>`);
   $('#total-available').after(`<p class="dashboard-tile-number"> $${hotel.calculateTotalSpent(userID)}`);
 }
 
 
 function makePastList(userID) {
   return hotel.returnPastBookings(userID, date).reduce((acc,booking) => {
-    acc += `<li>Room#${booking.roomNumber} on ${booking.date}</li>`
+    acc += `<li class="list-items">Room#${booking.roomNumber} on ${booking.date}</li>`
+    return acc;
+  }, '')
+}
+
+function makeUpcomingList(userID) {
+  return hotel.returnUpcomingBookings(userID, date).reduce((acc,booking) => {
+    acc += `<li class="list-items">Room#${booking.roomNumber} on ${booking.date}</li>`
     return acc;
   }, '')
 }
