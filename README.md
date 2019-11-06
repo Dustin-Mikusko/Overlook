@@ -20,8 +20,8 @@ Welcome to the Hotel Colorado. You can check out any time you'd like, but you ca
 
 ![UNADJUSTEDNONRAW_thumb_1544](https://user-images.githubusercontent.com/52764657/68316061-064be700-0076-11ea-9182-493bec19e3e5.jpg)
 
+![Image 11-6-19 at 9 16 AM](https://user-images.githubusercontent.com/52764657/68316191-457a3800-0076-11ea-8b43-471a0bd5c3ba.jpg)
 
-![UNADJUSTEDNONRAW_thumb_1545](https://user-images.githubusercontent.com/52764657/68316090-119f1280-0076-11ea-81f7-c45b9416e590.jpg)
 
 ## Setup
 
