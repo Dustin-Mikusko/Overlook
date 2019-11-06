@@ -1,4 +1,4 @@
-# Webpack Starter Kit
+# Overlook Hotel/Hotel Colorado
 
 ## Clone This Repo
 
