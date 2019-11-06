@@ -21,12 +21,14 @@
   padding-top: 10px;
   display: flex;
   justify-content: space-between;
+  // flex-wrap: wrap;
 }
 
 .customer-tile {
   @include managerDashboardTile;
   height: 60vh;
   overflow: scroll;
+  
 }
 
 .customer-tile-title {
@@ -41,6 +43,13 @@
   padding: 0;
 }
 
+.rooms-list{
+  &:hover {
+    background: rgba(6, 6, 108, 0.468);
+    cursor: pointer;
+  }
+}
+
 .list-items {
   background: rgba(0, 0,255, 0.1);
   margin: 10px 0px 8px 0px;
@@ -49,6 +58,18 @@
   border-radius: 3px;
   border: 1px solid black;
   box-shadow: 7px 7px 19px 2px rgba(0,0,0,0.35);
+}
+
+.book-btn {
+  @include button;
+  font-size: .5em;
+  width: 50%;
+  margin-top: 3px;
+}
+
+#book-date {
+  font-size: .7em;
+  padding: 5px;
 }
 
 
