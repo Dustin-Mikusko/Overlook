@@ -33,7 +33,7 @@ class Hotel {
   }
 
   calculatePercentOccupancy(date) {
-    return (100 - (this.returnAvailableRooms(date).length/this.rooms.length) * 100).toFixed(0);
+    return (100 - (this.returnAvailableRooms(date).length/this.rooms.length) * 100);
   }
 
   returnAllBookings(userID) {
@@ -54,6 +54,14 @@ class Hotel {
       acc += cost;
       return acc;
     }, 0)
+  }
+
+  getData(type) {
+    const root = 'https://fe-apps.herokuapp.com/api/v1/overlook/1904/';
+    const url = `${root}${type}`;
+    const promise = fetch(url)
+                    .then(data => data.json());
+    return promise;
   }
 
 }
