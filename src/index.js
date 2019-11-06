@@ -143,12 +143,4 @@ function formatDate(date) {
 
 	$('.date').text(`${formattedDate}`);
 
-function dropYear(dates) {
-  const reformattedDates = dates.map(date => {
-    const splitDate = date.split('/');
-    return [splitDate[1], splitDate[2]].join('/');
-  })
-  return reformattedDates
-}
-
 
