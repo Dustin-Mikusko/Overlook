@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 .login-page {
   font-family: $primary-font;
@@ -65,22 +66,7 @@ input {
 }
 
 .user-login-btn {
-  background-color: blue;
-  margin: auto;
-  height: 40px;
-  width: 30%;
-  color: white;
-  font-family: $primary-font;
-  font-size: 1.5em;
-  border: none;
-  border-radius: 3px;
-    &:hover {
-      background-color: rgb(91, 91, 254);
-      cursor: pointer;
-    }
-    &:active {
-      transform: scale(.97);
-    }
+  @include button;
 }
 
 ul {
@@ -89,6 +75,19 @@ ul {
 
 .error {
   color: red;
+}
+
+footer {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.tagline {
+  font-family: $logo-font;
+  font-size: 1em;
+  color: blue;
+  text-align: right;
 }
 
 .hidden {
