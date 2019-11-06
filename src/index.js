@@ -12,6 +12,8 @@ import User from './User';
 
 let hotel;
 let manager;
+let user;
+let selectedUser;
 
 function getData(type) {
 	const root = 'https://fe-apps.herokuapp.com/api/v1/overlook/1904/';
@@ -36,15 +38,31 @@ Promise.all([bookings, rooms, users]).then(promises => {
 
 
 $('.user-login-btn').on('click', loginHandler);
+
 $('.log-off').on('click', () => {
   removeError();
   resetPage();
   $('#user-id').val('');
   $('#user-password').val('');
+  $('#user-search').val('');
+  $('.upcoming-empty').empty();
+  $('.past-empty').empty();
   $('.login-page').removeClass('hidden');
   $('.manager-body').addClass('hidden');
   $('.customer-body').addClass('hidden');
-})
+});
+
+$('.book-btn').click(bookHandler)
+
+$('body').on('click', (event) => {
+  console.log(event.target);
+  if (event.target.classList.contains('rooms-list')) {
+    bookRoomHandler();
+  }
+  if (event.target.classList.contains('upcoming-list')) {
+    deleteHandler();
+  }
+});
 
 function loginHandler() {
  checkInputs();
@@ -61,6 +79,7 @@ function checkInputs() {
     customerHandler($userID);
   } else {
     createError();
+    setTimeout(removeError, 1300)
   }
 }
 
@@ -70,7 +89,7 @@ function createError() {
     $('input').css('border', '1px solid red');
     setTimeout(() => {
       $('.error').css('display', 'none');
-    }, 1500)
+    }, 1300)
 }
 
 function removeError() {
@@ -83,7 +102,8 @@ function resetPage() {
 }
 
 function managerHandler() {
-  manager = new Manager()
+  $('#user-search').css('border', '1px solid grey');
+  manager = new Manager(bookings.bookings, rooms.rooms, users.users);
   $('.login-page').addClass('hidden');
   $('.manager-body').removeClass('hidden');
   $('#occupancy-title').after(`<p class="dashboard-tile-number">${hotel.calculatePercentOccupancy(date)}%</p>`);
@@ -93,7 +113,7 @@ function managerHandler() {
 
 function customerHandler(userID) {
   let userName = users.users.find(user => user.id === userID);
-  let user = new User(userName.id, userName.name);
+  user = new User(userName.id, userName.name);
   $('.login-page').addClass('hidden');
   $('.customer-body').removeClass('hidden');
   $('.user-welcome').html(`Welcome,<br> ${user.name.split(' ')[0]}!`);
@@ -110,12 +130,70 @@ function makePastList(userID) {
   }, '')
 }
 
+function bookHandler() {
+  let bookDate = $('#book-date').val().split('-').join('/');
+  $('#book-date').after(`<ul class="book-list">${makeAvailableList(bookDate)}</ul>`)
+}
+
 function makeUpcomingList(userID) {
   return hotel.returnUpcomingBookings(userID, date).reduce((acc,booking) => {
-    acc += `<li class="list-items">Room: #${booking.roomNumber}<br> Date: ${booking.date}</li>`
+    acc += `<li data-conf="${booking.id}"class="list-items">Room: #${booking.roomNumber}<br> Date: ${booking.date}<br>Conf. #: ${booking.id}</li>`
     return acc;
   }, '')
 }
+
+function managerMakeUpcomingList(userID) {
+  return hotel.returnUpcomingBookings(userID, date).reduce((acc,booking) => {
+    acc += `<li data-conf="${booking.id}"class="list-items upcoming-list">Room: #${booking.roomNumber}<br> Date: ${booking.date}<br>Conf. #: ${booking.id}</li>`
+    return acc;
+  }, '')
+}
+
+
+function bookRoomHandler(event) {
+  let bookDate = $('#book-date').val().split('-').join('/');
+  user.bookRoom(bookDate, Number(event.target.dataset.id));
+  
+}
+
+function makeAvailableList(date) {
+  return hotel.returnAvailableRooms(date).reduce((acc, room) => {
+    acc += `<li class="list-items rooms-list" data-id="${room.number}">Room #: ${room.number}<br><br>Room Type: ${room.roomType}<br><br>Bed Size: ${room.bedSize}<br><br>Beds: ${room.numBeds}<br><br>Cost/Night: $${room.costPerNight}</li>`
+    return acc;
+  }, '');
+}
+
+$('.search-user').click(userSearch)
+
+function userSearch() {
+  let userNames = users.users.map(user => user.name);
+  if ($('#user-search').val().length === 0) {
+    createError();
+  } else { 
+    if (!userNames.includes($('#user-search').val())) {
+      $('.search-user').after('<p class="error-msg">User not found</p>')
+      setTimeout(clearErrorMessage, 1000)
+    } else {
+      $('#user-search').css('border', '1px solid grey');
+      let userName = $('#user-search').val();
+      let currentUser = manager.findUser(userName);
+      selectedUser = new User(currentUser.id, currentUser.name);
+      console.log(selectedUser);
+      $('.upcoming-empty').empty();
+      $('.past-empty').empty();
+      $('.upcoming-empty').append(`<ul class="book-list">${managerMakeUpcomingList(currentUser.id)}</ul>`);
+      $('.past-empty').append(`<ul class="book-list">${makePastList(currentUser.id)}</ul>`);
+      }
+    }
+  }
+
+  function deleteHandler() {
+    manager.deleteBooking(event.target.dataset.conf);
+  }
+
+  function clearErrorMessage() {
+    $('.error-msg').remove();
+  }
 
 
 function formatDate(date) {
@@ -143,13 +221,5 @@ function formatDate(date) {
 	const formattedDate = dateObject.toLocaleString('en', options);
 
 	$('.date').text(`${formattedDate}`);
-
-function dropYear(dates) {
-  const reformattedDates = dates.map(date => {
-    const splitDate = date.split('/');
-    return [splitDate[1], splitDate[2]].join('/');
-  })
-  return reformattedDates
-}
 
 
