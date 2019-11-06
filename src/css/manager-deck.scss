@@ -45,6 +45,36 @@
   @include managerTileNumber;
 }
 
+#user-search {
+  height: 40px;
+  font-size: .6em;
+}
+
+#user-search-tile {
+  height: 30vh;
+}
+
+.user-bookings {
+  height: 40vh;
+  overflow: scroll;
+}
+
+.user-search-section {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0px 30px;
+}
+
+.search-user {
+  @include button;
+  font-size: .5em;
+}
+
+.error-msg {
+  color: red;
+  font-size: .5em;
+  margin-bottom: 3px;
+}
 
 
 

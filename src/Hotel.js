@@ -9,15 +9,12 @@ class Hotel {
   }
   
   returnAvailableRooms(date) {
-    let roomNumbers = this.rooms.map(room => room.number)
-    let openRooms = [];
-    let bookedRooms = this.bookings.filter(booking => booking.date === date).map(book => book.roomNumber)
-    roomNumbers.forEach(room => {
-      if (!bookedRooms.includes(room)) {
-        openRooms.push(room)
-      }
+    let bookedRooms = this.bookings.filter(booking => booking.date === date);
+    let bookedNums = bookedRooms.map(room => room.roomNumber);
+    let roomsAv = this.rooms.filter(room => {
+      return !bookedNums.includes(room.number)
     })
-    return openRooms;
+    return roomsAv;
   }
 
   calculateRevenue(date) {

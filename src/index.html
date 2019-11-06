@@ -46,6 +46,22 @@
           <p id="rooms-available" class="dashboard-tile-title">Number of<br> Available Rooms:</p>
         </section>
         </main>
+        <article class="user-search-section">
+            <section id="user-search-tile" class="dashboard-tile">
+                <p class="dashboard-tile-title">Find User:</p><br>
+                <label for="user-search">Search Customer:</label>
+                <input id="user-search" type="text" placeholder="First Last">
+                <button type="button" class="search-user">Search</button>
+              </section>
+              <section class="user-bookings dashboard-tile">
+                <p id="user-past" class="dashboard-tile-title">Past Bookings for Customer:</p>
+                <div class="past-empty"></div>
+              </section>
+              <section class="user-bookings dashboard-tile">
+                  <p id="user-upcoming" class="dashboard-tile-title">Upcoming Bookings for Customer:</p>
+                  <div class="upcoming-empty"></div>
+                </section>
+        </article>
       </section>
       
 
@@ -64,10 +80,15 @@
             </section>
             <section class="customer-tile">
               <p id="past-title" class="customer-tile-title ">Past<br>Bookings:</p>
-              
             </section>
             <section class="customer-tile">
               <p id="total-available" class="customer-tile-title">Total Spent with<br> Hotel Colorado:</p>
+            </section><br>
+            <section class="customer-tile">
+              <p class="customer-tile-title">Book A Room:</p>
+              <button type="button" class="book-btn">Search Rooms</button><br>
+              <label for="book-date" clas>Select Date:</label>
+              <input id="book-date" type="date" placeholder="YYYY/MM/DD">
             </section>
             </main>
       </section>
