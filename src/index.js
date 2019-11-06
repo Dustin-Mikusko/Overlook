@@ -10,9 +10,8 @@ import Hotel from './Hotel';
 import Manager from './Manager';
 import User from './User';
 
-var hotel;
-var manager;
-var user;
+let hotel;
+let manager;
 
 function getData(type) {
 	const root = 'https://fe-apps.herokuapp.com/api/v1/overlook/1904/';
@@ -33,8 +32,6 @@ Promise.all([bookings, rooms, users]).then(promises => {
   users = promises[2];
 }).then(() => {
   hotel = new Hotel(bookings.bookings, rooms.rooms);
-  console.log(hotel);
-  console.log(users.users)
 });
 
 
@@ -56,11 +53,8 @@ function loginHandler() {
 function checkInputs() {
   let $user = $('#user-id').val();
   let $password = $('#user-password').val();
-  console.log($user);
-  console.log($password)
   if ($user === 'manager' && $password === 'overlook2019') {
     managerHandler();
-    console.log('hello')
   } 
   if ($user.includes('customer') && $password === 'overlook2019') {
     let $userID = Number($user.split('r')[1]);
@@ -99,26 +93,26 @@ function managerHandler() {
 
 function customerHandler(userID) {
   let userName = users.users.find(user => user.id === userID);
-  user = new User()
+  let user = new User(userName.id, userName.name);
   $('.login-page').addClass('hidden');
   $('.customer-body').removeClass('hidden');
-  $('.user-welcome').html(`Welcome,<br> ${userName.name.split(' ')[0]}!`);
-  $('#upcoming-title').after(`<ul class="book-list">${makeUpcomingList(userID)}</ul>`);
-  $('#past-title').after(`<ul class="book-list">${makePastList(userID)}</ul>`);
-  $('#total-available').after(`<p class="dashboard-tile-number"> $${hotel.calculateTotalSpent(userID)}</p>`);
+  $('.user-welcome').html(`Welcome,<br> ${user.name.split(' ')[0]}!`);
+  $('#upcoming-title').after(`<ul class="book-list">${makeUpcomingList(user.id)}</ul>`);
+  $('#past-title').after(`<ul class="book-list">${makePastList(user.id)}</ul>`);
+  $('#total-available').after(`<p class="dashboard-tile-number"> $${hotel.calculateTotalSpent(user.id)}</p>`);
 }
 
 
 function makePastList(userID) {
   return hotel.returnPastBookings(userID, date).reduce((acc,booking) => {
-    acc += `<li class="list-items">Room#${booking.roomNumber} on ${booking.date}</li>`
+    acc += `<li class="list-items">Room: #${booking.roomNumber}<br> Date: ${booking.date}</li>`
     return acc;
   }, '')
 }
 
 function makeUpcomingList(userID) {
   return hotel.returnUpcomingBookings(userID, date).reduce((acc,booking) => {
-    acc += `<li class="list-items">Room#${booking.roomNumber} on ${booking.date}</li>`
+    acc += `<li class="list-items">Room: #${booking.roomNumber}<br> Date: ${booking.date}</li>`
     return acc;
   }, '')
 }
