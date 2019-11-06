@@ -10,9 +10,19 @@ chai.use(spies);
 
 describe('Hotel', () => {
   let hotel;
+  let fetchSpy
 
   beforeEach(() => {
     hotel = new Hotel(bookings, rooms);
+    fetchSpy = chai.spy.on(global, 'fetch', () => {
+      return new Promise((resolve, reject) => {
+        resolve({message: 'Data has been fetched.'});
+      })
+    });
+  });
+
+  afterEach(() => {
+    chai.spy.restore(fetchSpy);
   });
 
   it('should house all the bookings', () => {
@@ -218,13 +228,8 @@ describe('Hotel', () => {
   });
 
   it('should gather booking data from API', () => {
-    let spy = chai.spy.on(global, 'fetch', () => {
-      return new Promise((resolve, reject) => {
-        resolve({message: 'Data has been fetched.'});
-      })
-    });
     hotel.getData('bookings/bookings', 'message')
-    expect(spy).to.have.been.called(1);
+    expect(fetchSpy).to.have.been.called(1);
   })
 
 });

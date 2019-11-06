@@ -10,6 +10,7 @@ import Hotel from './Hotel';
 import Manager from './Manager';
 import User from './User';
 
+
 let hotel;
 let manager;
 let user;
@@ -33,7 +34,7 @@ Promise.all([bookings, rooms, users]).then(promises => {
   rooms = promises[1];
   users = promises[2];
 }).then(() => {
-  hotel = new Hotel(bookings.bookings, rooms.rooms);
+  let hotel = new Hotel(bookings.bookings, rooms.rooms);
 });
 
 
@@ -102,6 +103,7 @@ function resetPage() {
 }
 
 function managerHandler() {
+
   $('#user-search').css('border', '1px solid grey');
   manager = new Manager(bookings.bookings, rooms.rooms, users.users);
   $('.login-page').addClass('hidden');
