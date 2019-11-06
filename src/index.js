@@ -39,14 +39,25 @@ Promise.all([bookings, rooms, users]).then(promises => {
 
 
 $('.user-login-btn').on('click', loginHandler);
+$('.log-off').on('click', () => {
+  removeError();
+  resetPage();
+  $('#user-id').val('');
+  $('#user-password').val('');
+  $('.login-page').removeClass('hidden');
+  $('.manager-body').addClass('hidden');
+  $('.customer-body').addClass('hidden');
+})
 
 function loginHandler() {
- checkInputs()
+ checkInputs();
 }
 
 function checkInputs() {
   let $user = $('#user-id').val();
   let $password = $('#user-password').val();
+  console.log($user);
+  console.log($password)
   if ($user === 'manager' && $password === 'overlook2019') {
     managerHandler();
     console.log('hello')
@@ -68,6 +79,15 @@ function createError() {
     }, 1500)
 }
 
+function removeError() {
+  $('input').css('border', '1px solid grey');
+}
+
+function resetPage() {
+  $('.dashboard-tile-number').remove();
+  $('.book-list').remove();
+}
+
 function managerHandler() {
   manager = new Manager()
   $('.login-page').addClass('hidden');
@@ -79,12 +99,13 @@ function managerHandler() {
 
 function customerHandler(userID) {
   let userName = users.users.find(user => user.id === userID);
+  user = new User()
   $('.login-page').addClass('hidden');
   $('.customer-body').removeClass('hidden');
   $('.user-welcome').html(`Welcome,<br> ${userName.name.split(' ')[0]}!`);
   $('#upcoming-title').after(`<ul class="book-list">${makeUpcomingList(userID)}</ul>`);
   $('#past-title').after(`<ul class="book-list">${makePastList(userID)}</ul>`);
-  $('#total-available').after(`<p class="dashboard-tile-number"> $${hotel.calculateTotalSpent(userID)}`);
+  $('#total-available').after(`<p class="dashboard-tile-number"> $${hotel.calculateTotalSpent(userID)}</p>`);
 }
 
 
