@@ -93,3 +93,9 @@ footer {
 .hidden {
   display: none;
 }
+
+@media screen and (max-width: 700px) {
+  .user-login-btn {
+    font-size: 1em;
+  }
+}

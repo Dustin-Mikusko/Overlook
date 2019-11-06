@@ -22,7 +22,7 @@
 
 .manager-body {
   background: linear-gradient(to bottom right,rgba(0, 0, 255, 0.61), rgba(0, 0, 255, 0.1));
-  height: 100vh;
+  height: 150vh;
   width: 100%;
 }
 
@@ -51,7 +51,7 @@
 }
 
 #user-search-tile {
-  height: 30vh;
+  height: 40vh;
 }
 
 .user-bookings {
@@ -83,6 +83,34 @@
   }
 }
 
+#manager-book-date {
+  font-size: .7em;
+  padding: 5px;
+  width: 30%;
+  
+}
+
+.manager-book {
+  width: 75%;
+  height: 40vh;
+  overflow: scroll;
+  margin: auto;
+  margin-top: 25px;
+}
+
+.manager-room-search-btn {
+  @include button;
+  margin: 15px;
+  font-size: 1em;
+}
+
+.manager-rooms-list {
+  &:hover {
+    background: rgba(6, 6, 108, 0.468);
+    cursor: pointer;
+  }
+}
+
 
 
 
@@ -93,7 +121,7 @@
   }
 
   .manager-body {
-    height: 100vh;
+    height: 185vh;
   }
 }
 
@@ -107,6 +135,6 @@
   }
 
   .manager-body{
-    height: 150vh;
+    height: 200vh;
   }
 }
