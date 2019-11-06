@@ -10,8 +10,7 @@ import Hotel from './Hotel';
 import Manager from './Manager';
 import User from './User';
 
-let hotel;
-let manager;
+
 
 function getData(type) {
 	const root = 'https://fe-apps.herokuapp.com/api/v1/overlook/1904/';
@@ -31,7 +30,7 @@ Promise.all([bookings, rooms, users]).then(promises => {
   rooms = promises[1];
   users = promises[2];
 }).then(() => {
-  hotel = new Hotel(bookings.bookings, rooms.rooms);
+  let hotel = new Hotel(bookings.bookings, rooms.rooms);
 });
 
 
@@ -83,7 +82,7 @@ function resetPage() {
 }
 
 function managerHandler() {
-  manager = new Manager()
+  let manager = new Manager()
   $('.login-page').addClass('hidden');
   $('.manager-body').removeClass('hidden');
   $('#occupancy-title').after(`<p class="dashboard-tile-number">${hotel.calculatePercentOccupancy(date)}%</p>`);
