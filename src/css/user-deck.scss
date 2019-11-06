@@ -43,9 +43,12 @@
 
 .list-items {
   background: rgba(0, 0,255, 0.1);
-  margin: 5px 0px 5px 0px;
-  text-align: center;
-  padding: 0;
+  margin: 10px 0px 8px 0px;
+  text-align: left;
+  padding: 3px;
+  border-radius: 3px;
+  border: 1px solid black;
+  box-shadow: 7px 7px 19px 2px rgba(0,0,0,0.35);
 }
 
 
@@ -54,6 +57,10 @@
   .customer-main {
     flex-wrap: wrap;
     justify-content: space-evenly;
+  }
+
+  .customer-body {
+    height: 170vh;
   }
 }
 
@@ -64,5 +71,9 @@
 
   .customer-tile {
     width: 85%;
+  }
+
+  .customer-body {
+    height: 230vh;
   }
 }

@@ -1,10 +1,12 @@
 import chai from 'chai';
 const expect = chai.expect;
+import spies from "chai-spies";
 
 import Hotel from '../src/Hotel';
 import bookings from '../data/bookings-data';
 import rooms from '../data/rooms-data';
-import users from '../data/users-data';
+
+chai.use(spies);
 
 describe('Hotel', () => {
   let hotel;
@@ -82,6 +84,16 @@ describe('Hotel', () => {
 
   it('should calculate the total amount spent for a given customer', () => {
     expect(hotel.calculateTotalSpent(12)).to.equal(497)
+  });
+
+  it('should gather booking data from API', () => {
+    let spy = chai.spy.on(global, 'fetch', () => {
+      return new Promise((resolve, reject) => {
+        resolve({message: 'Data has been fetched.'});
+      })
+    });
+    hotel.getData('bookings/bookings', 'message')
+    expect(spy).to.have.been.called(1);
   })
 
 });
