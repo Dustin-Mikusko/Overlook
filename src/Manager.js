@@ -25,7 +25,7 @@ class Manager extends Hotel {
           id: id
         })
       }).then(() => {
-        console.log('Booking Deleted!');
+        alert('Booking Deleted!');
       }).catch(() => 'Delete failed to happen');
   }
 

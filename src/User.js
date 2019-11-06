@@ -16,7 +16,7 @@ class User {
           "roomNumber": roomNumber
         })
       }).then(() => {
-        console.log('Room Booked!');
+        alert('Room Booked!');
       }).catch(() => 'Booking failed to happen');
   }
    

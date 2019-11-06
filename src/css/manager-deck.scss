@@ -76,6 +76,13 @@
   margin-bottom: 3px;
 }
 
+.upcoming-list {
+  &:hover {
+    background-color: rgba(6, 6, 108, 0.468);
+    cursor: pointer;
+  }
+}
+
 
 
 

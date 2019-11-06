@@ -26,6 +26,10 @@ describe('Manager', () => {
   it('should be able to find a specific booking id by date and room number', () => {
     expect(manager.findBooking(48,'2019/11/14', 18)).to.equal(1572293130161)
   })
+
+  it('should be able to delete an upcoming booking for user', () => {
+    
+  })
   
 
 
