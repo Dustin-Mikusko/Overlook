@@ -34,7 +34,7 @@ Promise.all([bookings, rooms, users]).then(promises => {
   rooms = promises[1];
   users = promises[2];
 }).then(() => {
-  let hotel = new Hotel(bookings.bookings, rooms.rooms);
+  hotel = new Hotel(bookings.bookings, rooms.rooms);
 });
 
 
@@ -56,14 +56,20 @@ $('.log-off').on('click', () => {
 $('.book-btn').click(bookHandler)
 
 $('body').on('click', (event) => {
-  console.log(event.target);
   if (event.target.classList.contains('rooms-list')) {
-    bookRoomHandler();
+    let bookDate = $('#book-date').val().split('-').join('/');
+    user.bookRoom(bookDate, Number(event.target.dataset.id));
   }
   if (event.target.classList.contains('upcoming-list')) {
     deleteHandler();
   }
+  if (event.target.classList.contains('manager-rooms-list')) {
+    let bookDate = $('#manager-book-date').val().split('-').join('/');
+    selectedUser.bookRoom(bookDate, Number(event.target.dataset.id));
+  }
 });
+
+$('.manager-room-search-btn').click(managerBookHandler);
 
 function loginHandler() {
  checkInputs();
@@ -134,7 +140,8 @@ function makePastList(userID) {
 
 function bookHandler() {
   let bookDate = $('#book-date').val().split('-').join('/');
-  $('#book-date').after(`<ul class="book-list">${makeAvailableList(bookDate)}</ul>`)
+  $('.search-empty').empty();
+  $('.search-empty').append(`<ul class="book-list">${makeAvailableList(bookDate)}</ul>`)
 }
 
 function makeUpcomingList(userID) {
@@ -151,16 +158,16 @@ function managerMakeUpcomingList(userID) {
   }, '')
 }
 
-
-function bookRoomHandler(event) {
-  let bookDate = $('#book-date').val().split('-').join('/');
-  user.bookRoom(bookDate, Number(event.target.dataset.id));
-  
-}
-
 function makeAvailableList(date) {
   return hotel.returnAvailableRooms(date).reduce((acc, room) => {
     acc += `<li class="list-items rooms-list" data-id="${room.number}">Room #: ${room.number}<br><br>Room Type: ${room.roomType}<br><br>Bed Size: ${room.bedSize}<br><br>Beds: ${room.numBeds}<br><br>Cost/Night: $${room.costPerNight}</li>`
+    return acc;
+  }, '');
+}
+
+function makeManagerAvailableList(date) {
+  return hotel.returnAvailableRooms(date).reduce((acc, room) => {
+    acc += `<li class="list-items manager-rooms-list" data-id="${room.number}">Room #: ${room.number}<br><br>Room Type: ${room.roomType}<br><br>Bed Size: ${room.bedSize}<br><br>Beds: ${room.numBeds}<br><br>Cost/Night: $${room.costPerNight}</li>`
     return acc;
   }, '');
 }
@@ -190,7 +197,13 @@ function userSearch() {
   }
 
   function deleteHandler() {
-    manager.deleteBooking(event.target.dataset.conf);
+    manager.deleteBooking(Number(event.target.dataset.conf));
+  }
+
+  function managerBookHandler() {
+    let bookDate = $('#manager-book-date').val().split('-').join('/');
+    $('.search-empty').empty();
+    $('.search-empty').append(`<ul class="book-list">${makeManagerAvailableList(bookDate)}</ul>`)
   }
 
   function clearErrorMessage() {
