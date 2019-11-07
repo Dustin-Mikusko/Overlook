@@ -16,7 +16,7 @@ class User {
           "roomNumber": roomNumber
         })
       }).then(() => {
-        alert('Room Booked!');
+        alert('Room Booked! Thank you for choosing Hotel Colorado!');
       }).catch(() => alert('Booking failed to happen'));
   }
    
