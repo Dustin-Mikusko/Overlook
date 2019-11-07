@@ -62,9 +62,6 @@ $('body').on('click', (event) => {
     let bookDate = $('#book-date').val().split('-').join('/');
     user.bookRoom(bookDate, Number(event.target.dataset.id));
   }
-  if (event.target.classList.contains('upcoming-list')) {
-    deleteHandler();
-  }
   if (event.target.classList.contains('manager-rooms-list')) {
     let bookDate = $('#manager-book-date').val().split('-').join('/');
     selectedUser.bookRoom(bookDate, Number(event.target.dataset.id));
@@ -72,6 +69,11 @@ $('body').on('click', (event) => {
 });
 
 $('.manager-room-search-btn').click(managerBookHandler);
+
+$('body').on('click', '.book-delete', function(event) {
+  deleteHandler();
+  event.target.closest('li').remove();
+})
 
 function loginHandler() {
  checkInputs();
@@ -111,7 +113,6 @@ function resetPage() {
 }
 
 function managerHandler() {
-
   $('#user-search').css('border', '1px solid grey');
   manager = new Manager(bookings.bookings, rooms.rooms, users.users);
   $('.login-page').addClass('hidden');
@@ -155,7 +156,7 @@ function makeUpcomingList(userID) {
 
 function managerMakeUpcomingList(userID) {
   return hotel.returnUpcomingBookings(userID, date).reduce((acc,booking) => {
-    acc += `<li data-conf="${booking.id}"class="list-items upcoming-list">Room: #${booking.roomNumber}<br> Date: ${booking.date}<br>Conf. #: ${booking.id}</li>`
+    acc += `<li class="list-items upcoming-list">Room: #${booking.roomNumber}<br> Date: ${booking.date}<br>Conf. #: ${booking.id}<button data-conf="${booking.id}" class="book-delete" type="button">Delete</button></li>`
     return acc;
   }, '')
 }
@@ -198,6 +199,7 @@ function userSearch() {
 
   function deleteHandler() {
     manager.deleteBooking(Number(event.target.dataset.conf));
+
   }
 
   function managerBookHandler() {

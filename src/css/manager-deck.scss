@@ -77,9 +77,9 @@
 }
 
 .upcoming-list {
+  position: relative;
   &:hover {
     background-color: rgba(6, 6, 108, 0.468);
-    cursor: pointer;
   }
 }
 
@@ -107,6 +107,19 @@
 .manager-rooms-list {
   &:hover {
     background: rgba(6, 6, 108, 0.468);
+    cursor: pointer;
+  }
+}
+
+.book-delete {
+  color: white;
+  border-radius: 3px;
+  border: none;
+  background: rgba(128, 20, 20, 0.94);
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  &:hover {
     cursor: pointer;
   }
 }
