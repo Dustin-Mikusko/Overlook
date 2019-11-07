@@ -55,6 +55,8 @@ $('.log-off').on('click', () => {
 
 $('.book-btn').click(bookHandler)
 
+$('.search-user').click(userSearch)
+
 $('body').on('click', (event) => {
   if (event.target.classList.contains('rooms-list')) {
     let bookDate = $('#book-date').val().split('-').join('/');
@@ -171,8 +173,6 @@ function makeManagerAvailableList(date) {
     return acc;
   }, '');
 }
-
-$('.search-user').click(userSearch)
 
 function userSearch() {
   let userNames = users.users.map(user => user.name);
