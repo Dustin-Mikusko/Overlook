@@ -105,10 +105,27 @@
 }
 
 .manager-rooms-list {
+  position: relative;
   &:hover {
     background: rgba(6, 6, 108, 0.468);
     cursor: pointer;
   }
+}
+
+.mgr-book-btn {
+  border-radius: 4px;
+  color: white;
+  font-size: .9em;
+  height: 50px;
+  width: 100px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: rgb(50, 154, 50);
+    &:hover {
+      cursor: pointer;
+      background: rgb(40, 138, 40);
+    }
 }
 
 .book-delete {
