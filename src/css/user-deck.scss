@@ -43,12 +43,6 @@
   padding: 0;
 }
 
-.rooms-list{
-  &:hover {
-    background: rgba(6, 6, 108, 0.468);
-  }
-}
-
 .user-book-btn {
   padding-top: 4px;
     border-radius: 4px;
@@ -56,10 +50,10 @@
     font-size: .9em;
     height: 30px;
     width: 70px;
-    background: rgb(50, 154, 50);
+    background:blue;
       &:hover {
         cursor: pointer;
-        background: rgb(40, 138, 40);
+        background:rgb(91, 91, 254);
       }
 }
 

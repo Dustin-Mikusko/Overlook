@@ -64,9 +64,16 @@ $('body').on('click', (event) => {
     event.target.closest('li').remove();
   }
   if (event.target.classList.contains('mgr-book-btn')) {
+    if (!$('#user-search').val()) {
+      $(event.target).after('<p class="book-error">No user selected</p>');
+      setTimeout(() => {
+        $('.book-error').css('display', 'none')
+      }, 1300)
+    } else {
     let bookDate = $('#manager-book-date').val().split('-').join('/');
     selectedUser.bookRoom(bookDate, Number(event.target.dataset.id));
     event.target.closest('li').remove();
+    }
   }
 });
 

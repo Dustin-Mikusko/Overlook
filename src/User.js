@@ -17,7 +17,7 @@ class User {
         })
       }).then(() => {
         alert('Room Booked!');
-      }).catch(() => 'Booking failed to happen');
+      }).catch(() => alert('Booking failed to happen'));
   }
    
 }

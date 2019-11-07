@@ -106,9 +106,6 @@
 
 .manager-rooms-list {
   position: relative;
-  &:hover {
-    background: rgba(6, 6, 108, 0.468);
-  }
 }
 
 .mgr-book-btn {
@@ -120,10 +117,10 @@
   position: absolute;
   bottom: 5px;
   right: 5px;
-  background: rgb(50, 154, 50);
+  background: blue;
     &:hover {
       cursor: pointer;
-      background: rgb(40, 138, 40);
+      background: rgb(91, 91, 254);
     }
 }
 
@@ -138,6 +135,14 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.book-error {
+  color: red;
+  margin-top: 5px;
+  position: absolute;
+  bottom: 60px;
+  right: 5px;
 }
 
 
