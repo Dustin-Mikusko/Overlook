@@ -58,9 +58,10 @@ $('.book-btn').click(bookHandler)
 $('.search-user').click(userSearch)
 
 $('body').on('click', (event) => {
-  if (event.target.classList.contains('rooms-list')) {
+  if (event.target.classList.contains('user-book-btn')) {
     let bookDate = $('#book-date').val().split('-').join('/');
     user.bookRoom(bookDate, Number(event.target.dataset.id));
+    event.target.closest('li').remove();
   }
   if (event.target.classList.contains('mgr-book-btn')) {
     let bookDate = $('#manager-book-date').val().split('-').join('/');
@@ -164,7 +165,7 @@ function managerMakeUpcomingList(userID) {
 
 function makeAvailableList(date) {
   return hotel.returnAvailableRooms(date).reduce((acc, room) => {
-    acc += `<li class="list-items rooms-list" data-id="${room.number}">Room #: ${room.number}<br><br>Room Type: ${room.roomType}<br><br>Bed Size: ${room.bedSize}<br><br>Beds: ${room.numBeds}<br><br>Cost/Night: $${room.costPerNight}</li>`
+    acc += `<li class="list-items rooms-list" >Room #: ${room.number}<br><br>Room Type: ${room.roomType}<br><br>Bed Size: ${room.bedSize}<br><br>Beds: ${room.numBeds}<br><br>Cost/Night: $${room.costPerNight}<br><button class="user-book-btn" type="button" data-id="${room.number}">Book</button></li>`
     return acc;
   }, '');
 }
