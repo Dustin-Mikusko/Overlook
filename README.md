@@ -4,7 +4,7 @@ Welcome to the Hotel Colorado. You can check out any time you'd like, but you ca
 ## Successes
 
 1. This was the first project in Turing where there was very little guidance in what classes and methods to have, so planning and organization went a long way to getting this up and running. 
-1. This site uses 100% JQuery, and 0 'vanilla' JavaScript. 
+1. This project utilizes the `fetch`, `fetch POST`, and `fetch DELETE` functionality.
 1. The Accessibility rating is 100. 
 1. The responsiveness works very well. 
 
